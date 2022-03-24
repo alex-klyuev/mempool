@@ -120,12 +120,12 @@ export class MempoolBlocksComponent implements OnInit, OnDestroy {
           const now = new Date().getTime() / 1000;
           const diff = now - DATime;
           const blocksInEpoch = block.height % 2016;
-          let difficultyChange = 0;
-          if (blocksInEpoch > 0) {
-            difficultyChange = (600 / (diff / blocksInEpoch ) - 1) * 100;
+          if (blocksInEpoch <= 146) {
+            return 600000;
           }
-          const timeAvgDiff = difficultyChange * 0.1;
 
+          const difficultyChange = (600 / (diff / blocksInEpoch ) - 1) * 100;
+          const timeAvgDiff = difficultyChange * 0.1;
           let timeAvgMins = 10;
           if (timeAvgDiff > 0 ){
             timeAvgMins -= Math.abs(timeAvgDiff);
